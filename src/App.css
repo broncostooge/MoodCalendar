@@ -1,0 +1,32 @@
+.App {
+  text-align: center;
+  background-color: #282c34;
+  color: white;
+  font-size: calc(10px + 2vmin);
+  min-height: 100vh;
+}
+
+.Calendar{
+  display: flex;
+  flex-direction:row;
+  justify-content: space-evenly;
+  border-style:solid;
+  border-color:white;
+  border-width: 1vh;
+}
+
+.Month{
+  flex-direction:column;
+  border-style:solid;
+  border-color:white;
+  border-width: 0.25vh;
+  width:20vh;
+  margin: 1vh;
+}
+
+.Rating{
+  margin:1vh;
+  height:5vh;
+  width:5vh;
+  color: white;
+}
