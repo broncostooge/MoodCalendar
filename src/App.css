@@ -1,4 +1,5 @@
 .App {
+  display:flex;
   text-align: center;
   background-color: #282c34;
   color: white;
@@ -6,27 +7,38 @@
   min-height: 100vh;
 }
 
-.Calendar{
-  display: flex;
-  flex-direction:row;
-  justify-content: space-evenly;
-  border-style:solid;
-  border-color:white;
-  border-width: 1vh;
+.DaysTextColumnTable{
+  empty-cells:show;
 }
 
-.Month{
+.Calendar{
+  flex: 1;
+  display:flex;
+  justify-content: center;
+  height: 75%;
+}
+
+.Rating{
+  border-radius: 50%;
+  height:15px;
+  width:15px;
+  color: white;
+}
+
+.Buffer{
+  flex: 2;
+}
+
+.TableOfContents{
   flex-direction:column;
   border-style:solid;
   border-color:white;
   border-width: 0.25vh;
-  width:20vh;
+  width: 5vh;
   margin: 1vh;
+  height: 70vh;
 }
 
-.Rating{
-  margin:1vh;
-  height:5vh;
-  width:5vh;
-  color: white;
+.TableOfContentsHeader{
+  font-size:10px;
 }
