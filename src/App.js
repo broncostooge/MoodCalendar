@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import './App.css';
 
-class TableOfContents extends Component {
+class MoodSelector extends Component {
   render() {
+
+    const options = [];
+
+    this.props.Moods.map((mood, index) => (
+      options.push(<div>{mood} <Mood /></div>)
+    ));
+
     return (
-      <div className="TableOfContents">
-      <h2 className = "TableOfContentsHeader">Table Of Contents</h2>
+      <div className="MoodSelector">
+        <h2 className = "MoodSelectorHeader">Table Of Contents</h2>
+        {options}
       </div>
     )
   }
@@ -29,19 +37,15 @@ class ColumnOfNumbers extends Component {
   }
 }
 
-class Square extends Component {
+class Mood extends Component {
   render() {
     return (
-      <tr>
-        <td>
-          <button className="Rating" key ={this.props.days}></button>
-        </td>
-      </tr>
+      <button className="MoodRating" key ={this.props.days}></button>
     );
   }
 }
 
-class Column extends Component {
+class Month extends Component {
   render() {
 
     const options = [];
@@ -51,7 +55,7 @@ class Column extends Component {
     let days = parseInt(monthParameter[1]);
 
     for (let i = 0; i < days; i++){
-      options.push(<Square key = {i}/>);
+      options.push(<Mood key = {i}/>);
     }
 
     return (
@@ -83,19 +87,19 @@ class App extends Component {
 
   renderCalendar() {
     return this.state.months.map((month, index) => (
-      <Column Month={month} key ={index} />
+      <Month Month={month} key ={index} />
     ));
   }
 
   render() {
     return (
       <div className="App">
-          <div className="Buffer">
-            <TableOfContents />
+          <div className="MoodSelector">
+            <MoodSelector Moods={this.state.moods}/>
           </div>
           <div className="Calendar">
-            <ColumnOfNumbers />
-            {this.renderCalendar()}
+            {/*<ColumnOfNumbers />
+            {this.renderCalendar()}*/}
           </div>
           <div className="Buffer"></div>
       </div>

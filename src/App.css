@@ -7,38 +7,28 @@
   min-height: 100vh;
 }
 
-.DaysTextColumnTable{
-  empty-cells:show;
+.MoodSelector{
+  display:flex;
+  flex-direction:column;
+}
+
+
+.TableOfContentsHeader{
+  font-size:10px;
 }
 
 .Calendar{
   flex: 1;
   display:flex;
-  justify-content: center;
-  height: 75%;
 }
 
-.Rating{
+.Buffer {
+  flex: 1;
+}
+
+.MoodRating{
   border-radius: 50%;
   height:15px;
   width:15px;
   color: white;
-}
-
-.Buffer{
-  flex: 2;
-}
-
-.TableOfContents{
-  flex-direction:column;
-  border-style:solid;
-  border-color:white;
-  border-width: 0.25vh;
-  width: 5vh;
-  margin: 1vh;
-  height: 70vh;
-}
-
-.TableOfContentsHeader{
-  font-size:10px;
 }
