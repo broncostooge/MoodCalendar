@@ -21,28 +21,77 @@ class Mood extends Component {
     super(props)
     this.state = {
       mood: {
-        name:this.props.name,
-        color:this.props.color
-      }
-    }
+        name: this.props.name,
+        color: this.props.color || "white"
+      },
+      colorCycle: [ 
+        {
+          current: "white",
+          next: "red"
+        },
+        {
+          current: "red",
+          next: "orange",
+        },
+        {
+          current: "orange",
+          next: "yellow",
+        },
+        {
+          current: "yellow",
+          next: "blue",
+        },
+        {
+          current: "blue",
+          next: "green",
+        },
+        {
+          current: "green",
+          next: "red",
+        }
+      ]
+    };
+
+    this.changeMood = this.changeMood.bind(this);
   }
   
+  changeMood(){
+    this.state.colorCycle.map((colorCycle, index) => {
+      if(this.state.mood.color === colorCycle.current)
+      {
+        this.setState({mood:{name:this.state.mood.name, color: colorCycle.next}});
+      }
+      console.log(this.state.mood.color)
+    })
+  }
+
   render() {
 
     let color = this.state.mood.color;
-
+    let moodName = "";
     const buttonStyle = {
       backgroundColor: "white"
     };
+
+    let button = <button className="MoodRating" style={buttonStyle} onClick={this.changeMood}></button>;
 
     if(color){
       buttonStyle.backgroundColor = color;
     }
 
+    if(this.props.name){
+      moodName = <span className="MoodName">{this.props.name}</span>;
+    }
+
+    if(this.props.TOCButton)
+    {
+      button = <button className="MoodRating" style={buttonStyle} onClick={this.changeMood} disabled></button>
+    }
+
     return (
       <div className="CalendarCell">
-        <span className="MoodName">{this.state.mood.name}</span>
-        <button className="MoodRating" style={buttonStyle} onClick={this.changeMood}></button>
+        {moodName}
+        {button}
       </div>
     );
   }
@@ -64,7 +113,7 @@ class Month extends Component {
 
     for(let i = 0; i < this.state.month.days; i++)
     {
-      buttons.push(<Mood key={i} />);
+      buttons.push(<Mood TOCButton = {false} key={i} />);
     }
 
     return (
@@ -139,7 +188,7 @@ class Calendar extends Component {
       const columnOfMonths = [];
 
       this.state.months.map((month, index) => {
-        columnOfMonths.push(<Month name={month.name} days={month.days} key={index} />)
+        return columnOfMonths.push(<Month name={month.name} days={month.days} key={index} />)
       });
 
     return (
@@ -152,23 +201,6 @@ class Calendar extends Component {
 }
 
 class TableOfContents extends Component {
-  render() {
-
-    const ListOfMoods = [];
-
-    this.props.Moods.map((mood, index) => {
-      ListOfMoods.push(<Mood name={mood.name} color={mood.color} key ={index}/>);
-    })
-
-    return (
-      <div>
-        {ListOfMoods}
-      </div>
-    )
-  }
-}
-
-class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -196,12 +228,34 @@ class App extends Component {
       ]
     }
   }
+  render() {
+
+    const ListOfMoods = [];
+
+    this.state.moods.map((mood, index) => {
+      return ListOfMoods.push(<Mood TOCButton = {true} name={mood.name} color={mood.color} key ={index}/>);
+    })
+
+    return (
+      <div>
+        {ListOfMoods}
+      </div>
+    )
+  }
+}
+
+class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+    }
+  }
 
   render() {
     return (
       <div className="App">
           <div className="Buffer">
-            <TableOfContents Moods={this.state.moods}/>
+            <TableOfContents />
           </div>
           <div className="Calendar">
             <Calendar />
