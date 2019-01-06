@@ -3,18 +3,11 @@
   text-align: center;
   background-color: #282c34;
   color: white;
-  font-size: calc(10px + 2vmin);
   min-height: 100vh;
 }
 
-.MoodSelector{
-  display:flex;
-  flex-direction:column;
-}
-
-
-.TableOfContentsHeader{
-  font-size:10px;
+.CalendarCell{
+  
 }
 
 .Calendar{
@@ -22,6 +15,10 @@
   display:flex;
 }
 
+.CalendarColumn{
+  display:flex;
+  flex-direction: column;
+}
 .Buffer {
   flex: 1;
 }

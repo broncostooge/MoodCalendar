@@ -1,78 +1,170 @@
 import React, { Component } from 'react';
 import './App.css';
 
-class MoodSelector extends Component {
-  render() {
-
-    const options = [];
-
-    this.props.Moods.map((mood, index) => (
-      options.push(<div>{mood} <Mood /></div>)
-    ));
-
-    return (
-      <div className="MoodSelector">
-        <h2 className = "MoodSelectorHeader">Table Of Contents</h2>
-        {options}
-      </div>
-    )
-  }
-}
-
 class ColumnOfNumbers extends Component {
   render() {
-    const options = [];
+    const days = [];
 
-    for(let i = 1; i < 32; i++)
+    for(let i = 0; i < 32; i++)
     {
-      options.push(<tr key = {i}><td key = {i}>{i}</td></tr>);
+      days.push(<div key ={i} className="CalendarCell">{i}</div>);
     }
 
     return (
-      <table className="DaysTextColumnTable">
-        <thead><tr><td>&nbsp;</td></tr></thead>
-        <tbody>{options}</tbody>
-      </table>
+      <div className="CalendarColumn">{days}</div>
     )
   }
 }
 
 class Mood extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      mood: {
+        name:this.props.name,
+        color:this.props.color
+      }
+    }
+  }
+  
   render() {
+
+    let color = this.state.mood.color;
+
+    const buttonStyle = {
+      backgroundColor: "white"
+    };
+
+    if(color){
+      buttonStyle.backgroundColor = color;
+    }
+
     return (
-      <button className="MoodRating" key ={this.props.days}></button>
+      <div className="CalendarCell">
+        <span className="MoodName">{this.state.mood.name}</span>
+        <button className="MoodRating" style={buttonStyle} onClick={this.changeMood}></button>
+      </div>
     );
   }
 }
 
 class Month extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      month: {
+        name: this.props.name,
+        days: this.props.days
+      }
+    }
+  }
   render() {
+    
+    const buttons = [];
 
-    const options = [];
-    let monthParameter = [];
-    monthParameter = this.props.Month.split(' ');
- 
-    let days = parseInt(monthParameter[1]);
-
-    for (let i = 0; i < days; i++){
-      options.push(<Mood key = {i}/>);
+    for(let i = 0; i < this.state.month.days; i++)
+    {
+      buttons.push(<Mood key={i} />);
     }
 
     return (
-      <table className="Month">
-        <thead>
-          <tr>
-            <td>
-              {monthParameter[0][0]}
-            </td>
-          </tr>
-        </thead>
-        <tbody>
-            {options}
-        </tbody>
-      </table>
-      
+      <div className = "CalendarColumn">
+        <div className = "CalendarCell">
+          {this.state.month.name[0]}
+        </div>
+        {buttons}
+      </div>
     );
+  }
+}
+
+class Calendar extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      months: [
+        {
+          name: "January",
+          days: 31
+        },
+        {
+          name: "Febuary",
+          days: 29
+        },
+        {
+          name: "March",
+          days: 31
+        },
+        {
+          name: "April",
+          days: 30
+        },
+        {
+          name: "May",
+          days: 31
+        },
+        {
+          name: "June",
+          days: 30
+        },
+        {
+          name: "July",
+          days: 31
+        },
+        {
+          name: "August",
+          days: 31
+        },
+        {
+          name: "September",
+          days: 30
+        },
+        {
+          name: "October",
+          days: 31
+        },
+        {
+          name: "November",
+          days: 30
+        },
+        {
+          name: "December",
+          days: 31
+        }
+      ]
+    }
+  }
+    render() {
+
+      const columnOfMonths = [];
+
+      this.state.months.map((month, index) => {
+        columnOfMonths.push(<Month name={month.name} days={month.days} key={index} />)
+      });
+
+    return (
+      <div className="Calendar">
+        <ColumnOfNumbers />
+        {columnOfMonths}
+      </div>
+    );
+  }
+}
+
+class TableOfContents extends Component {
+  render() {
+
+    const ListOfMoods = [];
+
+    this.props.Moods.map((mood, index) => {
+      ListOfMoods.push(<Mood name={mood.name} color={mood.color} key ={index}/>);
+    })
+
+    return (
+      <div>
+        {ListOfMoods}
+      </div>
+    )
   }
 }
 
@@ -80,26 +172,39 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      months: ["January 31", "Febuary 28", "March 31" ,"April 30", "May 31", "June 30", "July 31", "August 31", "September 30", "October 31", "November 30", "December 31"],
-      moods: ["Horrible", "Bad", "Average", "Good", "Great"]
+      moods: [
+        {
+          name: "Horrible", 
+          color: "Red"
+        }, 
+        {
+          name: "Bad", 
+          color: "Orange"
+        },
+        {
+          name: "Average", 
+          color: "Yellow"
+        },
+        {
+          name: "Good", 
+          color: "Blue"
+        },
+        {
+          name: "Great", 
+          color: "Green"
+        }
+      ]
     }
-  }
-
-  renderCalendar() {
-    return this.state.months.map((month, index) => (
-      <Month Month={month} key ={index} />
-    ));
   }
 
   render() {
     return (
       <div className="App">
-          <div className="MoodSelector">
-            <MoodSelector Moods={this.state.moods}/>
+          <div className="Buffer">
+            <TableOfContents Moods={this.state.moods}/>
           </div>
           <div className="Calendar">
-            {/*<ColumnOfNumbers />
-            {this.renderCalendar()}*/}
+            <Calendar />
           </div>
           <div className="Buffer"></div>
       </div>
