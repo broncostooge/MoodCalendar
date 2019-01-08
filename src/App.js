@@ -21,58 +21,60 @@ class Mood extends Component {
     super(props)
     this.state = {
       mood: {
-        name: this.props.name,
+        name: this.props.name || "default",
         color: this.props.color || "white"
-      },
-      colorCycle: [ 
-        {
-          current: "white",
-          next: "red"
-        },
-        {
-          current: "red",
-          next: "orange",
-        },
-        {
-          current: "orange",
-          next: "yellow",
-        },
-        {
-          current: "yellow",
-          next: "blue",
-        },
-        {
-          current: "blue",
-          next: "green",
-        },
-        {
-          current: "green",
-          next: "red",
-        }
-      ]
+      }
     };
 
     this.changeMood = this.changeMood.bind(this);
   }
   
   changeMood(){
-    this.state.colorCycle.map((colorCycle, index) => {
+
+    const colorCycles = [ 
+      {
+        current: "white",
+        next: "red"
+      },
+      {
+        current: "red",
+        next: "orange",
+      },
+      {
+        current: "orange",
+        next: "yellow",
+      },
+      {
+        current: "yellow",
+        next: "blue",
+      },
+      {
+        current: "blue",
+        next: "green",
+      },
+      {
+        current: "green",
+        next: "white",
+      }
+    ]
+
+    colorCycles.map((colorCycle, index) => {
       if(this.state.mood.color === colorCycle.current)
       {
-        this.setState({mood:{name:this.state.mood.name, color: colorCycle.next}});
+        return this.setState({mood:{name:this.state.mood.name, color: colorCycle.next}});
       }
-      console.log(this.state.mood.color)
+      return null;
     })
   }
 
   render() {
 
-    let color = this.state.mood.color;
-    let moodName = "";
     const buttonStyle = {
       backgroundColor: "white"
     };
 
+    let color = this.state.mood.color;
+    let moodName = "";
     let button = <button className="MoodRating" style={buttonStyle} onClick={this.changeMood}></button>;
 
     if(color){
@@ -85,7 +87,7 @@ class Mood extends Component {
 
     if(this.props.TOCButton)
     {
-      button = <button className="MoodRating" style={buttonStyle} onClick={this.changeMood} disabled></button>
+      button = <button className="MoodRating" style={buttonStyle} disabled></button>
     }
 
     return (
@@ -131,7 +133,10 @@ class Calendar extends Component {
   constructor(props){
     super(props)
     this.state = {
-      months: [
+    }
+  }
+    render() {
+      const ListOfMonthsAndDays = [
         {
           name: "January",
           days: 31
@@ -181,13 +186,9 @@ class Calendar extends Component {
           days: 31
         }
       ]
-    }
-  }
-    render() {
-
       const columnOfMonths = [];
 
-      this.state.months.map((month, index) => {
+      ListOfMonthsAndDays.map((month, index) => {
         return columnOfMonths.push(<Month name={month.name} days={month.days} key={index} />)
       });
 
@@ -204,35 +205,35 @@ class TableOfContents extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      moods: [
-        {
-          name: "Horrible", 
-          color: "Red"
-        }, 
-        {
-          name: "Bad", 
-          color: "Orange"
-        },
-        {
-          name: "Average", 
-          color: "Yellow"
-        },
-        {
-          name: "Good", 
-          color: "Blue"
-        },
-        {
-          name: "Great", 
-          color: "Green"
-        }
-      ]
     }
   }
   render() {
 
     const ListOfMoods = [];
+    const moods =  [
+      {
+        name: "Horrible", 
+        color: "Red"
+      }, 
+      {
+        name: "Bad", 
+        color: "Orange"
+      },
+      {
+        name: "Average", 
+        color: "Yellow"
+      },
+      {
+        name: "Good", 
+        color: "Blue"
+      },
+      {
+        name: "Great", 
+        color: "Green"
+      }
+    ]
 
-    this.state.moods.map((mood, index) => {
+    moods.map((mood, index) => {
       return ListOfMoods.push(<Mood TOCButton = {true} name={mood.name} color={mood.color} key ={index}/>);
     })
 
@@ -244,8 +245,8 @@ class TableOfContents extends Component {
   }
 }
 
-class App extends Component {
-  constructor(props) {
+class Stats extends Component {
+  constructor(props){
     super(props)
     this.state = {
     }
@@ -253,14 +254,132 @@ class App extends Component {
 
   render() {
     return (
+      <div className="Stats">
+        <div className="Count">
+          <Count />
+        </div>
+        <div className="ColumnGraph">
+          <ColumnGraph />
+        </div>
+        <div className="PieGraph">
+          <PieGraph />
+        </div>
+      </div>
+    )
+  }
+}
+
+class Count extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+    }
+  }
+
+  render() {
+
+    const moods =  [
+      {
+        name: "Horrible", 
+        color: "Red"
+      }, 
+      {
+        name: "Bad", 
+        color: "Orange"
+      },
+      {
+        name: "Average", 
+        color: "Yellow"
+      },
+      {
+        name: "Good", 
+        color: "Blue"
+      },
+      {
+        name: "Great", 
+        color: "Green"
+      }
+    ]
+
+    let CountList = []
+
+    moods.map((mood, index) => {
+      return CountList.push(<tr key={index}>{mood.name}Count:<td key={index} className={mood.name+'Count'}>0</td></tr>)
+    })
+
+    return (
+      <div>
+        <h3>Count</h3>
+        <table>
+          <tbody>
+            {CountList}
+          </tbody>
+        </table>
+      </div>
+    )
+  }
+}
+
+class ColumnGraph extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+    }
+  }
+  render() {
+    return (
+      <div>
+      <h3>Column Graph</h3>
+      </div>
+    )
+  }
+}
+
+class PieGraph extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+    }
+  }
+  render() {
+    return (
+      <div>
+      <h3>Pie Graph</h3>
+      </div>
+    )
+  }
+}
+
+class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      MoodCounter: {
+        Horrible: 0,
+        Bad: 0,
+        Average: 0,
+        Good: 0,
+        Great: 0
+      }
+    }
+    
+  }
+
+  render() {
+    return (
       <div className="App">
-          <div className="Buffer">
-            <TableOfContents />
-          </div>
-          <div className="Calendar">
-            <Calendar />
-          </div>
-          <div className="Buffer"></div>
+        <div className="Buffer">
+          <h2>Table of Contents</h2>
+          <TableOfContents />
+        </div>
+        <div className="Calendar">
+        <h2>Calendar</h2>
+          <Calendar />
+        </div>
+        <div className="Buffer">
+          <h2>Stats</h2>
+          <Stats />
+        </div>
       </div>
     );
   }

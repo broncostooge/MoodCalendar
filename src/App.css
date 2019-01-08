@@ -5,10 +5,11 @@
   color: white;
   min-height: 100vh;
 }
-
-.CalendarCell{
-  
+.Buffer {
+  flex: 1;
 }
+
+/* CALENDAR AREA */
 
 .Calendar{
   flex: 1;
@@ -19,13 +20,25 @@
   display:flex;
   flex-direction: column;
 }
-.Buffer {
-  flex: 1;
-}
 
 .MoodRating{
   border-radius: 50%;
   height:15px;
   width:15px;
   color: white;
+}
+
+/* STATS AREA */
+
+.Stats{
+  display: flex;
+  flex-direction: row;
+}
+
+.PieGraph{
+  flex: 1;
+}
+
+.ColumnGraph{
+  flex: 1;
 }
