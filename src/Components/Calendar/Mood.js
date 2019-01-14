@@ -14,7 +14,6 @@ export default class Mood extends Component {
     }
 
     changeMood(){
-
         const colorCycles = [ 
             {
                 current: "white",
