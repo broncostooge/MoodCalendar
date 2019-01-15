@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "d583d175129bc0d912c1",
+    "revision": "7aee801fd4fa367ec33e",
     "url": "/MoodCalendar/static/css/main.9abf6d60.chunk.css"
   },
   {
-    "revision": "d583d175129bc0d912c1",
-    "url": "/MoodCalendar/static/js/main.d583d175.chunk.js"
+    "revision": "7aee801fd4fa367ec33e",
+    "url": "/MoodCalendar/static/js/main.7aee801f.chunk.js"
   },
   {
     "revision": "11356deb32a9c186d395",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/MoodCalendar/static/js/runtime~main.82d23efc.js"
   },
   {
-    "revision": "b9de0ce5d67eda58c0e147cedd4ae52e",
+    "revision": "25de74289f696c4717cc93c4e690e991",
     "url": "/MoodCalendar/index.html"
   }
 ];
