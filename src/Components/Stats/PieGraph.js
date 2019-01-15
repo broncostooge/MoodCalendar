@@ -25,7 +25,7 @@ class PieGraph extends Component {
                 <h3>Pie Graph</h3>
                 <PieChart width={800} height={400} onMouseEnter={this.onPieEnter}>
                 <Pie
-                dataKey ="mood"
+                dataKey="value"
                 data={data} 
                 cx={400} 
                 cy={125} 
