@@ -3,12 +3,8 @@ import Stats from './Components/Stats'
 import TableOfContents from './Components/TableOfContents'
 import Calendar from './Components/Calendar'
 import './Contents/CSS/App.css';
-import myReducer from './reducers'
+import store from './store'
 import { Provider } from 'react-redux'
-
-const { createStore } = require('redux');
-
-const store = createStore(myReducer);
 
 class App extends Component {
   render() {
@@ -25,9 +21,7 @@ class App extends Component {
             </div>
             <div className="Buffer">
               <h2>Stats</h2>
-              <Stats 
-                IncreaseHorrible={() => store.dispatch({ type: 'INCREASE_HORRIBLE_MOOD_COUNT' })}
-              />
+              <Stats />
             </div>
         </div>
       </Provider>

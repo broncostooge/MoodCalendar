@@ -9,7 +9,6 @@ class Count extends Component {
       }
 
     render() {
-        console.log(this)
         const moods =  [
             {
                 name: "Horrible", 
