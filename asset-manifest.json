@@ -1,13 +1,13 @@
 {
-  "main.css": "/MoodCalendar/static/css/main.6203db71.chunk.css",
-  "main.js": "/MoodCalendar/static/js/main.aaf11bcd.chunk.js",
-  "main.js.map": "/MoodCalendar/static/js/main.aaf11bcd.chunk.js.map",
-  "static/js/1.33b112b2.chunk.js": "/MoodCalendar/static/js/1.33b112b2.chunk.js",
-  "static/js/1.33b112b2.chunk.js.map": "/MoodCalendar/static/js/1.33b112b2.chunk.js.map",
+  "main.css": "/MoodCalendar/static/css/main.68326d4f.chunk.css",
+  "main.js": "/MoodCalendar/static/js/main.b8c529a1.chunk.js",
+  "main.js.map": "/MoodCalendar/static/js/main.b8c529a1.chunk.js.map",
+  "static/js/1.11356deb.chunk.js": "/MoodCalendar/static/js/1.11356deb.chunk.js",
+  "static/js/1.11356deb.chunk.js.map": "/MoodCalendar/static/js/1.11356deb.chunk.js.map",
   "runtime~main.js": "/MoodCalendar/static/js/runtime~main.82d23efc.js",
   "runtime~main.js.map": "/MoodCalendar/static/js/runtime~main.82d23efc.js.map",
-  "static/css/main.6203db71.chunk.css.map": "/MoodCalendar/static/css/main.6203db71.chunk.css.map",
+  "static/css/main.68326d4f.chunk.css.map": "/MoodCalendar/static/css/main.68326d4f.chunk.css.map",
   "index.html": "/MoodCalendar/index.html",
-  "precache-manifest.80329afd297c5fd2b48190bae737649b.js": "/MoodCalendar/precache-manifest.80329afd297c5fd2b48190bae737649b.js",
+  "precache-manifest.98822d630551ab4ca5c46e43c299bb14.js": "/MoodCalendar/precache-manifest.98822d630551ab4ca5c46e43c299bb14.js",
   "service-worker.js": "/MoodCalendar/service-worker.js"
 }
