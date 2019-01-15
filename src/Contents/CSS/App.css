@@ -11,6 +11,10 @@
 
 /* CALENDAR AREA */
 
+.FirstColumnNumber{
+  height:2.5%;
+}
+
 .Calendar{
   flex: 1;
   display:flex;

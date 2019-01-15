@@ -16,7 +16,11 @@ export default class Month extends Component {
         const buttons = [];
 
         for(let i = 0; i < this.state.month.days; i++){
-            buttons.push(<Mood TOCButton = {false} key={i} />);
+            if(this.state.month.name === "Febuary" && i === 28){
+                buttons.push(<Mood LeapYearDay={true} TOCButton = {false} key={i} />);
+            }else{
+                buttons.push(<Mood TOCButton = {false} key={i} />);
+            }
         }
 
         return (

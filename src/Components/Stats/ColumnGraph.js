@@ -31,8 +31,8 @@ class ColumnGraph extends Component {
                     <Bar dataKey="Horrible" fill="red" />
                     <Bar dataKey="Bad" fill="orange" />
                     <Bar dataKey="Average" fill="yellow" />
-                    <Bar dataKey="Good" fill="green" />
-                    <Bar dataKey="Great" fill="blue" />
+                    <Bar dataKey="Good" fill="blue" />
+                    <Bar dataKey="Great" fill="green" />
                 </BarChart>
             </div>
         )

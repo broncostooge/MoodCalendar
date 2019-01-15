@@ -18,24 +18,25 @@ class PieGraph extends Component {
             {name: 'Good', value: this.props.Good}, 
             {name: 'Great', value: this.props.Great}
         ];
-        const COLORS = ['red', 'orange', 'yellow', 'blue', 'green']; 
+        const COLORS = ['red', 'orange', 'yellow', 'blue', 'green'];   
 
         return (
             <div>
                 <h3>Pie Graph</h3>
                 <PieChart width={800} height={400} onMouseEnter={this.onPieEnter}>
                 <Pie
+                dataKey ="mood"
                 data={data} 
-                cx={120} 
-                cy={200} 
+                cx={400} 
+                cy={125} 
                 innerRadius={60}
                 outerRadius={80} 
                 fill="#8884d8"
                 paddingAngle={5}
                 >
                     {
-                    data.map((entry, index) => <Cell fill={COLORS[index % COLORS.length]}/>)
-                }
+                        data.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]}/>)
+                    }
                 <Legend />
                 </Pie>
             </PieChart>

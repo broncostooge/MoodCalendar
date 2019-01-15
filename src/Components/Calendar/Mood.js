@@ -86,6 +86,10 @@ export default class Mood extends Component {
             buttonStyle.backgroundColor = color;
         }
 
+        if(this.props.LeapYearDay){
+            button = <button className = "MoodRating" id="LeapYearDay" style={buttonStyle} onClick={this.changeMood}></button>;
+        }
+
         if(this.props.name){
             moodName = <span className="MoodName">{this.props.name}</span>;
         }
