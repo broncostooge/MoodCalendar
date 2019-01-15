@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/MoodCalendar/precache-manifest.27d3a81b3c954f307af114a433e079b1.js"
+  "/MoodCalendar/precache-manifest.80329afd297c5fd2b48190bae737649b.js"
 );
 
 workbox.clientsClaim();
