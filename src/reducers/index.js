@@ -12,7 +12,6 @@ export default (state = initialState, action) => {
     //HORRIBLE
     if(action.type === 'INCREASE_HORRIBLE_MOOD_COUNT'){
         newState.Horrible += 1;
-        console.log(newState.Horrible)
     }
     if(action.type === 'DECREASE_HORRIBLE_MOOD_COUNT'){
         newState.Horrible -= 1;

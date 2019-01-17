@@ -10,7 +10,6 @@ class PieGraph extends Component {
     }
 
     render() {
-        console.log(this);
         const data = [
             {name: 'Horrible', value: this.props.Horrible}, 
             {name: 'Bad', value: this.props.Bad},

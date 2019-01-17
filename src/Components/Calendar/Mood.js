@@ -11,39 +11,16 @@ export default class Mood extends Component {
             }
         };
 
-    this.changeMood = this.changeMood.bind(this);
+        this.changeMood = this.changeMood.bind(this);
     }
 
-    changeMood(){
-        const colorCycles = [ 
-            {
-                current: "white",
-                next: "red"
-            },
-            {
-                current: "red",
-                next: "orange",
-            },
-            {
-                current: "orange",
-                next: "yellow",
-            },
-            {
-                current: "yellow",
-                next: "blue",
-            },
-            {
-                current: "blue",
-                next: "green",
-            },
-            {
-                current: "green",
-                next: "white",
-            }
-        ]
+    componentDidMount() {
+    }
+    
+    changeMood(colorCycles){
 
         colorCycles.map((colorCycle, index) => {
-            if(this.state.mood.color === colorCycle.current){
+            if(colorCycle.current === this.state.mood.color){
                 if(colorCycle.next === "red"){
                     store.dispatch({ type: 'INCREASE_HORRIBLE_MOOD_COUNT' });
                 }
@@ -77,31 +54,58 @@ export default class Mood extends Component {
         const buttonStyle = {
             backgroundColor: "white"
         };
+        
+        const colorCycles = [ 
+            {
+                current: "white",
+                next: "red"
+            },
+            {
+                current: "red",
+                next: "orange",
+            },
+            {
+                current: "orange",
+                next: "yellow",
+            },
+            {
+                current: "yellow",
+                next: "blue",
+            },
+            {
+                current: "blue",
+                next: "green",
+            },
+            {
+                current: "green",
+                next: "white",
+            }
+        ]
 
-        let color = this.state.mood.color;
-        let moodName = "";
-        let button = <button className="MoodRating" style={buttonStyle} onClick={this.changeMood}></button>;
+        const output = [];
 
-        if(color){
-            buttonStyle.backgroundColor = color;
-        }
+        let button;
+
+        buttonStyle.backgroundColor = this.state.mood.color;
 
         if(this.props.LeapYearDay){
-            button = <button className = "MoodRating" id="LeapYearDay" style={buttonStyle} onClick={this.changeMood}></button>;
+            button = <button key={Math.random} className = "MoodRating" id="LeapYearDay" style={buttonStyle} onClick={() => this.changeMood(colorCycles)}></button>;
+        }else if(this.props.TOCButton){
+            button = <button key={Math.random} className="MoodRating" style={buttonStyle} onClick={() => this.changeMood(colorCycles)} disabled></button>
+        }
+        else{
+            button = <button key={Math.random} className="MoodRating" style={buttonStyle} onClick={() => this.changeMood(colorCycles)}></button>;
         }
 
         if(this.props.name){
-            moodName = <span className="MoodName">{this.props.name}</span>;
+            output.push(<span key={this.props.name} className="MoodName">{this.props.name}</span>)
         }
 
-        if(this.props.TOCButton){
-            button = <button className="MoodRating" style={buttonStyle} disabled></button>
-        }
+        output.push(button);
 
         return (
             <div className="CalendarCell">
-                {moodName}
-                {button}
+                {output}
             </div>
         );
     }
