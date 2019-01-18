@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Mood from '../Calendar/Mood';
+import { store } from '../../store'
 
 export default class extends Component{
     constructor(props) {
@@ -9,10 +10,37 @@ export default class extends Component{
       }
       
       handleChange(e){
-        let sel = document.getElementById("LeapYearSelect");
+        const sel = document.getElementById("LeapYearSelect");
+        let leapYearButton = document.getElementById("LeapYearDay");
         let text= sel.options[sel.selectedIndex].text;
 
-        text === "Yes" ? document.getElementById("LeapYearDay").style.display = "" : document.getElementById("LeapYearDay").style.display = "none";
+        if(text === "Yes"){
+          leapYearButton.style.display = "";
+        }
+        else{
+          leapYearButton.style.display = "none";
+
+          if(leapYearButton.style.backgroundColor === "red"){
+            store.dispatch({ type: 'DECREASE_HORRIBLE_MOOD_COUNT' });
+            console.log("red");
+          }
+          else if(leapYearButton.style.backgroundColor === "orange"){
+            store.dispatch({ type: 'DECREASE_BAD_MOOD_COUNT' });
+          }
+          else if(leapYearButton.style.backgroundColor === "yellow"){
+            store.dispatch({ type: 'DECREASE_AVERAGE_MOOD_COUNT' });
+          }
+          else if(leapYearButton.style.backgroundColor === "blue"){
+            store.dispatch({ type: 'DECREASE_GOOD_MOOD_COUNT' });
+          }
+          else if(leapYearButton.style.backgroundColor === "green"){
+            store.dispatch({ type: 'DECREASE_GREAT_MOOD_COUNT' });
+          }
+
+          leapYearButton.style.backgroundColor = "white";
+          localStorage.removeItem('Febuary 28');
+
+        }
       }
 
       render() {
