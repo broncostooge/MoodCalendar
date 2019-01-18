@@ -6,10 +6,13 @@ export default class extends Component{
     constructor(props){
         super(props)
             this.state = {
-        }
+                columnOfMonths : []
+        };
+
+        this.CreateArrayOfMonthsAndDays = this.CreateArrayOfMonthsAndDays.bind(this);
     }
 
-    render() {
+    CreateArrayOfMonthsAndDays(){
         const ListOfMonthsAndDays = [
             {
                 name: "January",
@@ -61,16 +64,25 @@ export default class extends Component{
             }
         ]
 
-        const columnOfMonths = [];
+        const months = [];
 
         ListOfMonthsAndDays.map((month, index) => {
-            return columnOfMonths.push(<Month name={month.name} days={month.days} key={index} />)
+            return months.push(<Month name={month.name} days={month.days} key={index} />)
         });
+
+        return months;
+    }
+
+    render() {
+
+        let months = [];
+
+        months = this.CreateArrayOfMonthsAndDays();
 
         return (
             <div className="Calendar">
                 <ColumnOfNumbers />
-                {columnOfMonths}
+                {months}
             </div>
         );
     }

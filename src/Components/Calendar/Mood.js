@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import store from '../../store'
+import { store } from '../../store'
 
 export default class Mood extends Component {
     constructor(props) {
@@ -7,14 +7,13 @@ export default class Mood extends Component {
         this.state = {
             mood: {
                 name: this.props.name || "default",
-                color: this.props.color || "white"
+                month: this.props.month,
+                day: this.props.day,
+                color: localStorage.getItem(this.props.month + ' ' + this.props.day) || this.props.color || "white",
             }
         };
 
         this.changeMood = this.changeMood.bind(this);
-    }
-
-    componentDidMount() {
     }
     
     changeMood(colorCycles){
@@ -43,7 +42,8 @@ export default class Mood extends Component {
                 else if(colorCycle.next === "white"){
                     store.dispatch({ type: 'DECREASE_GREAT_MOOD_COUNT'});
                 }
-                return this.setState({mood:{name:this.state.mood.name, color: colorCycle.next}});
+                localStorage.setItem(this.props.month + ' ' + this.props.day, colorCycle.next);
+                return this.setState({mood:{name:this.state.mood.name, month:this.state.mood.month, day:this.state.mood.day, color:colorCycle.next}});
             }
             return null;
         })
@@ -87,6 +87,13 @@ export default class Mood extends Component {
         let button;
 
         buttonStyle.backgroundColor = this.state.mood.color;
+
+        const colorOfMood = localStorage.getItem(this.state.mood.month + ' ' + this.state.mood.day);
+
+        if(colorOfMood && !this.props.TOCButton){
+            buttonStyle.backgroundColor = colorOfMood;
+            console.log(this.state)
+        }
 
         if(this.props.LeapYearDay){
             button = <button key={Math.random} className = "MoodRating" id="LeapYearDay" style={buttonStyle} onClick={() => this.changeMood(colorCycles)}></button>;
