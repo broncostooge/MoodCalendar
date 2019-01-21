@@ -1,20 +1,6 @@
 import React, { Component } from 'react';
-//import { store } from '../../store';
-import Modal from 'react-modal';
-
-const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
-  }
-};
-
-// Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
-Modal.setAppElement('#root')
+import { store } from '../../store';
+import Modal from 'react-responsive-modal';
 
 export default class Mood extends Component {
     constructor(props) {
@@ -25,56 +11,89 @@ export default class Mood extends Component {
                 month: this.props.month,
                 day: this.props.day,
                 color: localStorage.getItem(this.props.month + ' ' + this.props.day) || this.props.color || "white",
-                modalIsOpen: false
-            }
+                note: ""
+            },
+            open: false,
         };
-        
-
-        this.changeMood = this.changeMood.bind(this);
-        this.afterOpenModal = this.afterOpenModal.bind(this);
-        this.closeModal = this.closeModal.bind(this);
     }
 
-    afterOpenModal() {
-        // references are now sync'd and can be accessed.
-        this.subtitle.style.color = '#f00';
-    }
+    onOpenModal = () => {
+        this.setState({ open: true });
+    };
 
-    closeModal() {
-        this.setState({modalIsOpen: false});
-    }
+    onCloseModal = () => {
+        this.setState({ open: false });
+    };
     
-    changeMood(colorCycles){
-        this.setState({modalIsOpen: true});/*
-        colorCycles.map((colorCycle, index) => {
-            if(colorCycle.current === this.state.mood.color){
-                if(colorCycle.next === "red"){
-                    store.dispatch({ type: 'INCREASE_HORRIBLE_MOOD_COUNT' });
-                }
-                else if(colorCycle.next === "orange"){
-                    store.dispatch({ type: 'DECREASE_HORRIBLE_MOOD_COUNT' });
-                    store.dispatch({ type: 'INCREASE_BAD_MOOD_COUNT' });
-                }
-                else if(colorCycle.next === "yellow"){
-                    store.dispatch({ type: 'DECREASE_BAD_MOOD_COUNT' });
-                    store.dispatch({ type: 'INCREASE_AVERAGE_MOOD_COUNT' });
-                }
-                else if(colorCycle.next === "blue"){
-                    store.dispatch({ type: 'DECREASE_AVERAGE_MOOD_COUNT' });
-                    store.dispatch({ type: 'INCREASE_GOOD_MOOD_COUNT' });
-                }
-                else if(colorCycle.next === "green"){
-                    store.dispatch({ type: 'DECREASE_GOOD_MOOD_COUNT' });
-                    store.dispatch({ type: 'INCREASE_GREAT_MOOD_COUNT' });
-                }
-                else if(colorCycle.next === "white"){
-                    store.dispatch({ type: 'DECREASE_GREAT_MOOD_COUNT'});
-                }
-                localStorage.setItem(this.props.month + ' ' + this.props.day, colorCycle.next);
-                return this.setState({mood:{name:this.state.mood.name, month:this.state.mood.month, day:this.state.mood.day, color:colorCycle.next}});
+    dispatchIncreaseMoodToStore(colorToChangeTo){
+        switch(colorToChangeTo){
+            case "red":
+                store.dispatch({ type: 'INCREASE_HORRIBLE_MOOD_COUNT' });
+                break;
+            case "orange":
+                store.dispatch({ type: 'INCREASE_BAD_MOOD_COUNT' });
+                break;
+            case "yellow":
+                store.dispatch({ type: 'INCREASE_AVERAGE_MOOD_COUNT' });
+                break;
+            case "blue":
+                store.dispatch({ type: 'INCREASE_GOOD_MOOD_COUNT' });
+                break;
+            case "green":
+                store.dispatch({ type: 'INCREASE_GREAT_MOOD_COUNT' });
+                break;
+            default:
+        }
+    }
+
+    dispatchDecreaseMoodToStore(colorChangingFrom){
+        switch(colorChangingFrom){
+            case "red":
+                store.dispatch({ type: 'DECREASE_HORRIBLE_MOOD_COUNT' });
+                break;
+            case "orange":
+                store.dispatch({ type: 'DECREASE_BAD_MOOD_COUNT' });
+                break;
+            case "yellow":
+                store.dispatch({ type: 'DECREASE_AVERAGE_MOOD_COUNT' });
+                break;
+            case "blue":
+                store.dispatch({ type: 'DECREASE_GOOD_MOOD_COUNT' });
+                break;
+            case "green":
+                store.dispatch({ type: 'DECREASE_GREAT_MOOD_COUNT' });
+                break;
+            default:
+        }
+
+    }
+
+    changeMood(colorToChangeTo, colorChangingFrom){
+        
+        this.dispatchIncreaseMoodToStore(colorToChangeTo);
+
+        this.dispatchDecreaseMoodToStore(colorChangingFrom);
+        
+        localStorage.setItem(this.props.month + ' ' + this.props.day, colorToChangeTo);
+        
+        this.setState({mood:{name:this.state.mood.name, month:this.state.mood.month, day:this.state.mood.day, color:colorToChangeTo, note:this.state.mood.note}});
+    }
+
+    saveNote(){
+        const noteText =  document.getElementById("NoteTextArea");
+        const noteSaved = document.getElementById("NoteSaved");
+
+        this.setState({mood:{name:this.state.mood.name, month:this.state.mood.month, day:this.state.mood.day, color:this.state.mood.color, note: noteText.value}});
+        noteSaved.style.display = "block";
+
+    }
+
+    setTextArea(note){
+        setTimeout(function(){
+            if(document.getElementById("NoteTextArea")){
+                document.getElementById("NoteTextArea").value = note;
             }
-            return null;
-        })*/
+        }, 10);
     }
 
     render() {
@@ -82,33 +101,6 @@ export default class Mood extends Component {
         const buttonStyle = {
             backgroundColor: "white"
         };
-        
-        const colorCycles = [ 
-            {
-                current: "white",
-                next: "red"
-            },
-            {
-                current: "red",
-                next: "orange",
-            },
-            {
-                current: "orange",
-                next: "yellow",
-            },
-            {
-                current: "yellow",
-                next: "blue",
-            },
-            {
-                current: "blue",
-                next: "green",
-            },
-            {
-                current: "green",
-                next: "white",
-            }
-        ]
 
         const output = [];
 
@@ -120,16 +112,15 @@ export default class Mood extends Component {
 
         if(colorOfMood && !this.props.TOCButton){
             buttonStyle.backgroundColor = colorOfMood;
-            console.log(this.state)
         }
 
         if(this.props.LeapYearDay){
-            button = <button key={Math.random} className = "MoodRating" id="LeapYearDay" style={buttonStyle} onClick={() => this.changeMood(colorCycles)}></button>;
+            button = <button key={Math.random} className = "MoodRating" id="LeapYearDay" style={buttonStyle} onClick={() => {this.onOpenModal()}}></button>;
         }else if(this.props.TOCButton){
-            button = <button key={Math.random} className="MoodRating" style={buttonStyle} onClick={() => this.changeMood(colorCycles)} disabled></button>
+            button = <button key={Math.random} className="MoodRating" style={buttonStyle} disabled></button>
         }
         else{
-            button = <button key={Math.random} className="MoodRating" style={buttonStyle} onClick={() => {this.changeMood(colorCycles)}}></button>;
+            button = <button key={Math.random} className="MoodRating" style={buttonStyle} onClick={() => {this.onOpenModal()}}></button>;
         }
 
         if(this.props.name){
@@ -140,24 +131,32 @@ export default class Mood extends Component {
 
         return (
             <div className="CalendarCell">
-                <Modal
-                isOpen={this.state.modalIsOpen}
-                onAfterOpen={this.afterOpenModal}
-                onRequestClose={this.closeModal}
-                style={customStyles}
-                >
-
-                    <h2 ref={subtitle => this.subtitle = subtitle}>Set Mood for {this.state.mood.month} {this.state.mood.day}</h2>
-                    <button onClick={this.closeModal}>close</button>
-                    <form>
-                        <input />
-                        <button onClick={() => this.setState({mood:{name:this.state.mood.name, month:this.state.mood.month, day:this.state.mood.day, color:"red"}})}>Horrible</button>
-                        <button>Bad</button>
-                        <button>Average</button>
-                        <button>Good</button>
-                        <button>Great</button>
-                        <textbox></textbox>
-                    </form>
+                <Modal onEntered={this.setTextArea(this.state.mood.note)} open={this.state.open} onClose={this.onCloseModal} center>
+                    <div className="ModalWindow">
+                        <div className="LeftSideModal">
+                            <div>
+                                <button className="ModalHorribleButton MoodRating ModalButton" onClick={() => {this.changeMood("red", this.state.mood.color)}}></button>Horrible
+                            </div>
+                            <div>
+                                <button className="ModalBadButton MoodRating ModalButton" onClick={() => {this.changeMood("orange", this.state.mood.color)}}></button>Bad
+                            </div>
+                            <div>
+                                <button className="ModalAverageButton MoodRating ModalButton" onClick={() => {this.changeMood("yellow", this.state.mood.color)}}></button>Average 
+                            </div>
+                            <div>
+                                <button className="ModalGoodButton MoodRating ModalButton" onClick={() => {this.changeMood("blue", this.state.mood.color)}}></button>Good
+                            </div>
+                            <div>
+                                <button className="ModalGreatButton MoodRating ModalButton" onClick={() => {this.changeMood("green", this.state.mood.color)}}></button>Great
+                            </div>
+                        </div>
+                        <div className="RightSideModal">
+                            <h2>Leave A Note About The Day</h2>
+                            <textarea id="NoteTextArea">{this.state.note}</textarea>
+                            <button onClick={() => {this.saveNote()}}>Save Note</button>
+                            <span id="NoteSaved">Note Saved</span>
+                        </div>
+                    </div>
                 </Modal>
                 {output}
             </div>
