@@ -22,7 +22,6 @@ export default class extends Component{
 
           if(leapYearButton.style.backgroundColor === "red"){
             store.dispatch({ type: 'DECREASE_HORRIBLE_MOOD_COUNT' });
-            console.log("red");
           }
           else if(leapYearButton.style.backgroundColor === "orange"){
             store.dispatch({ type: 'DECREASE_BAD_MOOD_COUNT' });
@@ -75,12 +74,12 @@ export default class extends Component{
 
         return (
           <div>
-          Leap Year
-          <select id="LeapYearSelect" onChange={this.handleChange.bind(this)}>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select>
-            {ListOfMoods}
+            Leap Year
+            <select id="LeapYearSelect" onChange={this.handleChange.bind(this)}>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+              {ListOfMoods}
           </div>
         )
       }

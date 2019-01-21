@@ -1,3 +1,6 @@
+h1{
+  margin:0!important;
+}
 .App {
   display:flex;
   text-align: center;
@@ -10,7 +13,6 @@
 }
 
 /* CALENDAR AREA */
-
 .FirstColumnNumber{
   height:2.5%;
 }
@@ -33,7 +35,6 @@
 }
 
 /* STATS AREA */
-
 .Stats{
   display: flex;
   flex-direction: row;
@@ -45,4 +46,35 @@
 
 .ColumnGraph{
   flex: 1;
+}
+
+/* MODAL AREA */
+.ModalHorribleButton{
+  background-color: red;
+}
+
+.ModalBadButton{
+  background-color: orange;
+}
+
+.ModalAverageButton{
+  background-color: yellow;
+}
+
+.ModalGoodButton{
+  background-color: blue;
+}
+
+.ModalGreatButton{
+  background-color: green;
+}
+
+.ModalWindow{
+  display:flex;
+  flex-direction: row;
+}
+
+.LeftSideModal, .RightSideModal{
+  display:flex;
+  flex-direction: column;
 }
