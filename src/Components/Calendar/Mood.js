@@ -11,7 +11,7 @@ export default class Mood extends Component {
                 month: this.props.month,
                 day: this.props.day,
                 color: localStorage.getItem(this.props.month + ' ' + this.props.day) || this.props.color || "white",
-                note: ""
+                note: localStorage.getItem(this.props.month + ' ' + this.props.day + ' note') || ""
             },
             open: false,
         };
@@ -82,6 +82,8 @@ export default class Mood extends Component {
     saveNote(){
         const noteText =  document.getElementById("NoteTextArea");
         const noteSaved = document.getElementById("NoteSaved");
+
+        localStorage.setItem(this.props.month + ' ' + this.props.day + ' note', noteText.value);
 
         this.setState({mood:{name:this.state.mood.name, month:this.state.mood.month, day:this.state.mood.day, color:this.state.mood.color, note: noteText.value}});
         noteSaved.style.display = "block";
