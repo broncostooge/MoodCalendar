@@ -78,3 +78,7 @@ h1{
   display:flex;
   flex-direction: column;
 }
+
+#NoteSaved{
+  display:none;
+}

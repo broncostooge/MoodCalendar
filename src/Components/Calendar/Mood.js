@@ -23,8 +23,6 @@ export default class Mood extends Component {
 
     onCloseModal = () => {
         this.setState({ open: false });
-        const noteSaved = document.getElementById("NoteSaved");
-        noteSaved.style.display = "none";
     };
     
     dispatchIncreaseMoodToStore(colorToChangeTo){
@@ -85,9 +83,7 @@ export default class Mood extends Component {
         const noteText =  document.getElementById("NoteTextArea");
         const noteSaved = document.getElementById("NoteSaved");
 
-        this.setState({mood:{name:this.state.mood.name, month:this.state.mood.month, day:this.state.mood.day, color:this.state.mood.color, note: noteText.value
-        }}, function() {
-        });
+        this.setState({mood:{name:this.state.mood.name, month:this.state.mood.month, day:this.state.mood.day, color:this.state.mood.color, note: noteText.value}});
         noteSaved.style.display = "block";
 
     }
@@ -97,7 +93,7 @@ export default class Mood extends Component {
             if(document.getElementById("NoteTextArea")){
                 document.getElementById("NoteTextArea").value = note;
             }
-        }, 100);
+        }, 10);
     }
 
     render() {
@@ -105,34 +101,6 @@ export default class Mood extends Component {
         const buttonStyle = {
             backgroundColor: "white"
         };
-        
-        /*
-        const colorCycles = [ 
-            {
-                current: "white",
-                next: "red"
-            },
-            {
-                current: "red",
-                next: "orange",
-            },
-            {
-                current: "orange",
-                next: "yellow",
-            },
-            {
-                current: "yellow",
-                next: "blue",
-            },
-            {
-                current: "blue",
-                next: "green",
-            },
-            {
-                current: "green",
-                next: "white",
-            }
-        ]*/
 
         const output = [];
 
