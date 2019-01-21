@@ -1,5 +1,20 @@
 import React, { Component } from 'react';
-import { store } from '../../store'
+//import { store } from '../../store';
+import Modal from 'react-modal';
+
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
+
+// Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
+Modal.setAppElement('#root')
 
 export default class Mood extends Component {
     constructor(props) {
@@ -10,14 +25,27 @@ export default class Mood extends Component {
                 month: this.props.month,
                 day: this.props.day,
                 color: localStorage.getItem(this.props.month + ' ' + this.props.day) || this.props.color || "white",
+                modalIsOpen: false
             }
         };
+        
 
         this.changeMood = this.changeMood.bind(this);
+        this.afterOpenModal = this.afterOpenModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+    }
+
+    afterOpenModal() {
+        // references are now sync'd and can be accessed.
+        this.subtitle.style.color = '#f00';
+    }
+
+    closeModal() {
+        this.setState({modalIsOpen: false});
     }
     
     changeMood(colorCycles){
-
+        this.setState({modalIsOpen: true});/*
         colorCycles.map((colorCycle, index) => {
             if(colorCycle.current === this.state.mood.color){
                 if(colorCycle.next === "red"){
@@ -46,7 +74,7 @@ export default class Mood extends Component {
                 return this.setState({mood:{name:this.state.mood.name, month:this.state.mood.month, day:this.state.mood.day, color:colorCycle.next}});
             }
             return null;
-        })
+        })*/
     }
 
     render() {
@@ -101,7 +129,7 @@ export default class Mood extends Component {
             button = <button key={Math.random} className="MoodRating" style={buttonStyle} onClick={() => this.changeMood(colorCycles)} disabled></button>
         }
         else{
-            button = <button key={Math.random} className="MoodRating" style={buttonStyle} onClick={() => this.changeMood(colorCycles)}></button>;
+            button = <button key={Math.random} className="MoodRating" style={buttonStyle} onClick={() => {this.changeMood(colorCycles)}}></button>;
         }
 
         if(this.props.name){
@@ -112,6 +140,25 @@ export default class Mood extends Component {
 
         return (
             <div className="CalendarCell">
+                <Modal
+                isOpen={this.state.modalIsOpen}
+                onAfterOpen={this.afterOpenModal}
+                onRequestClose={this.closeModal}
+                style={customStyles}
+                >
+
+                    <h2 ref={subtitle => this.subtitle = subtitle}>Set Mood for {this.state.mood.month} {this.state.mood.day}</h2>
+                    <button onClick={this.closeModal}>close</button>
+                    <form>
+                        <input />
+                        <button onClick={() => this.setState({mood:{name:this.state.mood.name, month:this.state.mood.month, day:this.state.mood.day, color:"red"}})}>Horrible</button>
+                        <button>Bad</button>
+                        <button>Average</button>
+                        <button>Good</button>
+                        <button>Great</button>
+                        <textbox></textbox>
+                    </form>
+                </Modal>
                 {output}
             </div>
         );
