@@ -82,3 +82,7 @@ h1{
 #NoteSaved{
   display:none;
 }
+
+body > div:nth-child(7) > div > div > button.styles_closeButton__20ID4{
+  display: none;
+}
