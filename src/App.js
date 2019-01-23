@@ -6,9 +6,6 @@ import './Contents/CSS/App.css';
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistor, store } from './store';
-import CreateUser from './Auth/CreateUser'
-import Logout from './Auth/Logout'
-import Login from './Auth/Login'
 
 class App extends Component {
   constructor(props) {
@@ -27,22 +24,10 @@ class App extends Component {
   };
 
   render() {
-/*
-  const ref = firebase.database().ref('Average');
-
-  ref.on('value', (snapshot) => {
-    console.log(snapshot.val());
-  });
-  */
 
   return (
     <Provider store={store} >
       <PersistGate loading={null} persistor={persistor}>
-          
-          <Login />
-          <Logout />
-          <CreateUser />
-          
           <div className="App">
               <div className="Buffer">
                 <h2>Table of Contents</h2>
