@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import firebase from '../Firebase';
+import { Link } from 'react-router-dom'
 
 export default class Logout extends Component{
     constructor(props) {
@@ -14,7 +15,6 @@ export default class Logout extends Component{
     Logout() {
         firebase.auth().signOut()
         .then(function(){
-            alert('Logged Out');
         })
         .catch(function(error) {
             console.log(error);
@@ -23,7 +23,9 @@ export default class Logout extends Component{
 
     render(){
         return(
-            <button onClick={ () => { this.Logout() }}>Logout</button>
+            <Link to='/'>
+                <button onClick={ () => { this.Logout() }}>Logout</button>
+            </Link>
         )
     }
 }
