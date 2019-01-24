@@ -3,7 +3,8 @@ const initialState = {
     Bad:0,
     Average:0,
     Good:0,
-    Great:0
+    Great:0,
+    authenticated: false
 };
 
 export default (state = initialState, action) => {
@@ -47,6 +48,14 @@ export default (state = initialState, action) => {
     }
     if(action.type === 'DECREASE_GREAT_MOOD_COUNT'){
         newState.Great -= 1;
+    }
+
+    //AUTHENTICATION
+    if(action.type === 'SET_AUTHENTICATE_TRUE'){
+        newState.authenticated = true;
+    }
+    if(action.type === 'SET_AUTHENTICATE_FALSE'){
+        newState.authenticated = false;
     }
 
     return newState;

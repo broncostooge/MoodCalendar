@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-
-//CSS
-import './Contents/CSS/App.css';
-
-//Components
 import Routes from './Routes'
+import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
+import { persistor, store } from './store';
 
 class App extends Component {
   constructor(props) {
@@ -16,9 +14,11 @@ class App extends Component {
   render() {
 
     return (
-      <div>
+      <Provider store={store} >
+        <PersistGate loading={null} persistor={persistor}>
         <Routes />
-      </div>
+        </PersistGate>
+      </Provider>
     );
   }
 }

@@ -19,7 +19,6 @@ export default class CreateUser extends Component {
             alert('User: ' + email + ' Created');
         })
         .catch(function(error) {
-
             var errorCode = error.code;
             var errorMessage = error.message;
 

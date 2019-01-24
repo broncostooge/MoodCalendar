@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import firebase from '../Firebase';
+import { store } from '../store/'
 
 export default class HomePage extends Component {
     constructor(props) {
@@ -15,24 +16,18 @@ export default class HomePage extends Component {
     Login(username, password) {
         firebase.auth().signInWithEmailAndPassword(username, password)
         .then(function(){
-            alert('Logged In');
+            store.dispatch({ type: 'SET_AUTHENTICATE_TRUE' });
         })
         .catch(function(error) {
             var errorCode = error.code;
             var errorMessage = error.message;
 
-            if (errorCode === 'auth/wrong-password') {
-                alert('Wrong password.');
-            } else if(errorCode === 'auth/argument-error') {
-                alert('A UserName must be supplied');
-            }else{
-                alert(errorMessage);
-            }
+            console.log(errorCode);
+            console.log(errorMessage);
         });
     }
 
     render() {
-
         return (
             <div>
                 <h1>Mood Calendar Home Page</h1>

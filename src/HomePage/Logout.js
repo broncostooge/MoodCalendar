@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import firebase from '../Firebase';
 import { Link } from 'react-router-dom'
+import { store } from '../store/'
 
 export default class Logout extends Component{
     constructor(props) {
@@ -15,9 +16,14 @@ export default class Logout extends Component{
     Logout() {
         firebase.auth().signOut()
         .then(function(){
+            store.dispatch({ type: 'SET_AUTHENTICATE_FALSE' });
         })
         .catch(function(error) {
-            console.log(error);
+            var errorCode = error.code;
+            var errorMessage = error.message;
+
+            console.log(errorCode);
+            console.log(errorMessage);
         });
     }
 
