@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { store } from '../../store';
 import Modal from 'react-responsive-modal';
+import firebase from '../../Firebase'
+import { connect } from 'react-redux';
 
-export default class Mood extends Component {
+class Mood extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -29,18 +31,33 @@ export default class Mood extends Component {
         switch(colorToChangeTo){
             case "red":
                 store.dispatch({ type: 'INCREASE_HORRIBLE_MOOD_COUNT' });
+                firebase.firestore().collection("UserMoodCalendar").doc(firebase.auth().currentUser.uid).get().then((thisDoc) => {
+                    firebase.firestore().collection("UserMoodCalendar").doc(firebase.auth().currentUser.uid).update({Horrible: thisDoc.data().Horrible + 1 });
+                })
                 break;
             case "orange":
                 store.dispatch({ type: 'INCREASE_BAD_MOOD_COUNT' });
+                firebase.firestore().collection("UserMoodCalendar").doc(firebase.auth().currentUser.uid).get().then((thisDoc) => {
+                    firebase.firestore().collection("UserMoodCalendar").doc(firebase.auth().currentUser.uid).update({Bad: thisDoc.data().Bad + 1 });
+                })
                 break;
             case "yellow":
                 store.dispatch({ type: 'INCREASE_AVERAGE_MOOD_COUNT' });
+                firebase.firestore().collection("UserMoodCalendar").doc(firebase.auth().currentUser.uid).get().then((thisDoc) => {
+                    firebase.firestore().collection("UserMoodCalendar").doc(firebase.auth().currentUser.uid).update({Average: thisDoc.data().Average + 1 });
+                })
                 break;
             case "blue":
                 store.dispatch({ type: 'INCREASE_GOOD_MOOD_COUNT' });
+                firebase.firestore().collection("UserMoodCalendar").doc(firebase.auth().currentUser.uid).get().then((thisDoc) => {
+                    firebase.firestore().collection("UserMoodCalendar").doc(firebase.auth().currentUser.uid).update({Good: thisDoc.data().Good + 1 });
+                })
                 break;
             case "green":
                 store.dispatch({ type: 'INCREASE_GREAT_MOOD_COUNT' });
+                firebase.firestore().collection("UserMoodCalendar").doc(firebase.auth().currentUser.uid).get().then((thisDoc) => {
+                    firebase.firestore().collection("UserMoodCalendar").doc(firebase.auth().currentUser.uid).update({Great: thisDoc.data().Great + 1 });
+                })
                 break;
             default:
         }
@@ -50,18 +67,33 @@ export default class Mood extends Component {
         switch(colorChangingFrom){
             case "red":
                 store.dispatch({ type: 'DECREASE_HORRIBLE_MOOD_COUNT' });
+                firebase.firestore().collection("UserMoodCalendar").doc(firebase.auth().currentUser.uid).get().then((thisDoc) => {
+                    firebase.firestore().collection("UserMoodCalendar").doc(firebase.auth().currentUser.uid).update({Horrible: thisDoc.data().Horrible - 1 });
+                })
                 break;
             case "orange":
                 store.dispatch({ type: 'DECREASE_BAD_MOOD_COUNT' });
+                firebase.firestore().collection("UserMoodCalendar").doc(firebase.auth().currentUser.uid).get().then((thisDoc) => {
+                    firebase.firestore().collection("UserMoodCalendar").doc(firebase.auth().currentUser.uid).update({Bad: thisDoc.data().Bad - 1 });
+                })
                 break;
             case "yellow":
                 store.dispatch({ type: 'DECREASE_AVERAGE_MOOD_COUNT' });
+                firebase.firestore().collection("UserMoodCalendar").doc(firebase.auth().currentUser.uid).get().then((thisDoc) => {
+                    firebase.firestore().collection("UserMoodCalendar").doc(firebase.auth().currentUser.uid).update({Average: thisDoc.data().Average - 1 });
+                })
                 break;
             case "blue":
                 store.dispatch({ type: 'DECREASE_GOOD_MOOD_COUNT' });
+                firebase.firestore().collection("UserMoodCalendar").doc(firebase.auth().currentUser.uid).get().then((thisDoc) => {
+                    firebase.firestore().collection("UserMoodCalendar").doc(firebase.auth().currentUser.uid).update({Good: thisDoc.data().Good - 1 });
+                })
                 break;
             case "green":
                 store.dispatch({ type: 'DECREASE_GREAT_MOOD_COUNT' });
+                firebase.firestore().collection("UserMoodCalendar").doc(firebase.auth().currentUser.uid).get().then((thisDoc) => {
+                    firebase.firestore().collection("UserMoodCalendar").doc(firebase.auth().currentUser.uid).update({Great: thisDoc.data().Great - 1 });
+                })
                 break;
             default:
         }
@@ -165,3 +197,11 @@ export default class Mood extends Component {
         );
     }
 }
+
+function mapStateToProps(state) {
+    return { 
+        User: state.User
+    };
+  }
+
+export default connect(mapStateToProps)(Mood);

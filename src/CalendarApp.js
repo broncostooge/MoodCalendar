@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistor, store } from './store';
-import Logout from './HomePage/Logout'
 
 //CSS
 import './Contents/CSS/App.css';
@@ -11,6 +10,7 @@ import './Contents/CSS/App.css';
 import Stats from './Components/Stats'
 import TableOfContents from './Components/TableOfContents'
 import Calendar from './Components/Calendar'
+import Logout from './HomePage/Logout'
 
 export default class CalendarApp extends Component {
   constructor(props) {

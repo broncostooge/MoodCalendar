@@ -27,7 +27,7 @@ export default class Logout extends Component{
 
     render(){
         return(
-            <Link to='/MoodCalendar/Login'>
+            <Link to='/MoodCalendar'>
                 <input type="button" onClick={ () => { this.Logout() }} value="Logout"/>
             </Link>
         )

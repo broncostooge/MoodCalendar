@@ -3,7 +3,8 @@ const initialState = {
     Bad:0,
     Average:0,
     Good:0,
-    Great:0
+    Great:0,
+    User: null
 };
 
 export default (state = initialState, action) => {
@@ -47,6 +48,11 @@ export default (state = initialState, action) => {
     }
     if(action.type === 'DECREASE_GREAT_MOOD_COUNT'){
         newState.Great -= 1;
+    }
+
+    //SET USER
+    if(action.type === 'SET_USER'){
+        newState.User = action.User;
     }
 
     return newState;

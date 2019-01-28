@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import firebase from '../Firebase';
 import '../Contents/CSS/LoginPage.css'
+import { connect } from 'react-redux';
+import { store } from '../store'
 
-export default class HomePage extends Component {
+class HomePage extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -36,10 +38,12 @@ export default class HomePage extends Component {
 
         if(email && password){
             firebase.auth().signInWithEmailAndPassword(email, password)
-            .then(() => {
+            .then((user) => {
 
                 document.getElementById('login_success').style.display = "block";
                 
+                store.dispatch({ type: 'SET_USER', User: user });
+
                 setTimeout(() => {
                     this.props.history.push('/MoodCalendar/App');
                 }, 1000);
@@ -76,7 +80,7 @@ export default class HomePage extends Component {
             <div className="wrapper fadeInDown">
                 <div id="formContent">
                     <div class="fadeIn first">
-                    <h1>Mood Calendar Home Page</h1>
+                    <h1>Login</h1>
                     </div>
                     <form>
 
@@ -102,3 +106,11 @@ export default class HomePage extends Component {
         )
     }
 }
+
+function mapStateToProps(state) {
+    return { 
+        User: state.User
+    };
+  }
+
+export default connect(mapStateToProps)(HomePage);
