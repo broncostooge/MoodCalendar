@@ -1,5 +1,10 @@
 import React, { Component }  from 'react';
 import { connect } from 'react-redux';
+import HorribleLogo from '../../Contents/Images/Horrible.png'
+import BadLogo from '../../Contents/Images/Bad.png'
+import AverageLogo from '../../Contents/Images/Average.png'
+import GoodLogo from '../../Contents/Images/Good.png'
+import GreatLogo from '../../Contents/Images/Great.png'
 
 class Count extends Component {
     constructor(props){
@@ -32,27 +37,28 @@ class Count extends Component {
             }
         ]
 
-        let CountList = []
+        let CountListDiv = []
 
-        function CountOutput(countList, name, index, moodCount){
-            return countList.push(<tr key={index}>{name}: <td key={index} className={name+'Count'}>{moodCount}</td></tr>);
+        function CountOutputDiv(countList, name, index, moodCount, imgSrc){
+            return(countList.push(<div className="StatsCountRow" key={index}><div><img src={imgSrc}/></div><div>{moodCount}</div></div>))
         }
+
 
         moods.map((mood, index) => {
             if(mood.name === "Horrible"){
-                CountOutput(CountList, mood.name, index, this.props.Horrible);
+                CountOutputDiv(CountListDiv, mood.name, index, this.props.Horrible, HorribleLogo);
             }
             if(mood.name === "Bad"){
-                CountOutput(CountList, mood.name, index, this.props.Bad);
+                CountOutputDiv(CountListDiv, mood.name, index, this.props.Bad, BadLogo);
             }
             if(mood.name === "Average"){
-                CountOutput(CountList, mood.name, index, this.props.Average);
+                CountOutputDiv(CountListDiv, mood.name, index, this.props.Average, AverageLogo);
             }
             if(mood.name === "Good"){
-                CountOutput(CountList, mood.name, index, this.props.Good);
+                CountOutputDiv(CountListDiv, mood.name, index, this.props.Good, GoodLogo);
             }
             if(mood.name === "Great"){
-                CountOutput(CountList, mood.name, index, this.props.Great);
+                CountOutputDiv(CountListDiv, mood.name, index, this.props.Great, GreatLogo);
             }
 
             return -1;
@@ -60,12 +66,7 @@ class Count extends Component {
 
         return (
             <div>
-                <h3>Count</h3>
-                <table>
-                    <tbody>
-                        {CountList}
-                    </tbody>
-                </table>
+                {CountListDiv}
             </div>
         )
     }

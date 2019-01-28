@@ -9,6 +9,7 @@ export default class Stats extends Component{
         return (
             <div className="Stats">
                 <div className="Count">
+                    <h3>Count</h3>
                     <Count />
                 </div>
                 <div className="ColumnGraph">

@@ -12,7 +12,7 @@ class Mood extends Component {
                 name: this.props.name || "default",
                 month: this.props.month,
                 day: this.props.day,
-                color: localStorage.getItem(this.props.month + ' ' + this.props.day) || this.props.color || "white",
+                color: localStorage.getItem(this.props.month + ' ' + this.props.day) || this.props.color || "gray",
                 note: localStorage.getItem(this.props.month + ' ' + this.props.day + ' note') || ""
             },
             open: false,
@@ -133,7 +133,7 @@ class Mood extends Component {
     render() {
 
         const buttonStyle = {
-            backgroundColor: "white"
+            backgroundColor: "gray"
         };
 
         const output = [];
