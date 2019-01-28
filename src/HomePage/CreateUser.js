@@ -37,7 +37,7 @@ export default class CreateUser extends Component {
                 document.getElementById('create_success').style.display = "block";
                 setTimeout(() => {
                     this.props.history.push('/');
-                }, 2000);
+                }, 1000);
             })
             .catch((error) => {
                 this.setState (() => {
@@ -80,7 +80,7 @@ export default class CreateUser extends Component {
                         <input type="button" className="fadeIn fourth" value="Create User" onClick={ () => { this.CreateUser(document.getElementById('login').value, document.getElementById('password').value) }}/>
 
                         <div id="formFooter">
-                            <span className="underlineHover"><Link to='/'>Go Back To Login Page</Link></span>
+                            <span className="underlineHover"><Link to='/MoodCalendar/Login'>Go Back To Login Page</Link></span>
                             <div className="alert alert-success" id="create_success">
                                 <strong>Success!</strong> User Created
                             </div>

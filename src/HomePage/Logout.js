@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import firebase from '../Firebase';
 import { Link } from 'react-router-dom'
-import { store } from '../store/'
 
 export default class Logout extends Component{
     constructor(props) {
@@ -16,7 +15,6 @@ export default class Logout extends Component{
     Logout() {
         firebase.auth().signOut()
         .then(function(){
-            store.dispatch({ type: 'SET_AUTHENTICATE_FALSE' });
         })
         .catch(function(error) {
             var errorCode = error.code;
@@ -29,7 +27,7 @@ export default class Logout extends Component{
 
     render(){
         return(
-            <Link to='/'>
+            <Link to='/MoodCalendar/Login'>
                 <input type="button" onClick={ () => { this.Logout() }} value="Logout"/>
             </Link>
         )

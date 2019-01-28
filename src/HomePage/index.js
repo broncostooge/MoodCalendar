@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import firebase from '../Firebase';
-import { store } from '../store/'
 import '../Contents/CSS/LoginPage.css'
 
 export default class HomePage extends Component {
@@ -17,10 +16,14 @@ export default class HomePage extends Component {
 
     }
 
-    componentDidMount(){
+    HideAlerts(){
         document.getElementById('login_warning').style.display = "none";
         document.getElementById('login_danger').style.display = "none";
         document.getElementById('login_success').style.display = "none";
+    }
+
+    componentDidMount(){
+        this.HideAlerts();
     }
 
     Login(email, password) {
@@ -29,21 +32,17 @@ export default class HomePage extends Component {
             return {WarningMessage: "", ErrorCode: "", ErrorMessage : ""};
         })
 
-        document.getElementById('login_warning').style.display = "none";
-        document.getElementById('login_danger').style.display = "none";
-        document.getElementById('login_success').style.display = "none";
+        this.HideAlerts();
 
         if(email && password){
             firebase.auth().signInWithEmailAndPassword(email, password)
             .then(() => {
 
                 document.getElementById('login_success').style.display = "block";
-
-                store.dispatch({ type: 'SET_AUTHENTICATE_TRUE' });
                 
                 setTimeout(() => {
-                    this.props.history.push('/MoodCalendar');
-                }, 2000);
+                    this.props.history.push('/MoodCalendar/App');
+                }, 1000);
             })
             .catch((error) => {
                 this.setState (() => {
@@ -86,7 +85,7 @@ export default class HomePage extends Component {
                         <input type="button" class="fadeIn fourth" value="Log In" onClick={ () => { this.Login(document.getElementById('login').value, document.getElementById('password').value) }}/>
                         
                         <div id="formFooter">
-                            Not Registerd?<span class="underlineHover"><Link to='/create'>Create an account</Link></span>
+                            Not Registerd?<span class="underlineHover"><Link to='/MoodCalendar/create'>Create an account</Link></span>
                             <div className="alert alert-success" id="login_success">
                                 <strong>Success!</strong> Login Successfull
                             </div>
