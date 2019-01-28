@@ -30,7 +30,7 @@ export default class Logout extends Component{
     render(){
         return(
             <Link to='/'>
-                <button onClick={ () => { this.Logout() }}>Logout</button>
+                <input type="button" onClick={ () => { this.Logout() }} value="Logout"/>
             </Link>
         )
     }
