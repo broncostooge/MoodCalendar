@@ -45,7 +45,7 @@ class HomePage extends Component {
                 store.dispatch({ type: 'SET_USER', User: user });
 
                 setTimeout(() => {
-                    this.props.history.push('/MoodCalendar/App');
+                    this.props.history.push('/MoodCalendar');
                 }, 1000);
             })
             .catch((error) => {
@@ -79,17 +79,17 @@ class HomePage extends Component {
         return (
             <div className="wrapper fadeInDown">
                 <div id="formContent">
-                    <div class="fadeIn first">
+                    <div className="fadeIn first">
                     <h1>Login</h1>
                     </div>
                     <form>
 
-                        <input type="text" id="login" class="fadeIn second" name="login" placeholder="username"/>
-                        <input type="text" id="password" class="fadeIn third" name="login" placeholder="password"/>
-                        <input type="button" class="fadeIn fourth" value="Log In" onClick={ () => { this.Login(document.getElementById('login').value, document.getElementById('password').value) }}/>
+                        <input type="text" id="login" className="fadeIn second" name="login" placeholder="username"/>
+                        <input type="text" id="password" className="fadeIn third" name="login" placeholder="password"/>
+                        <input type="button" className="fadeIn fourth" value="Log In" onClick={ () => { this.Login(document.getElementById('login').value, document.getElementById('password').value) }}/>
                         
                         <div id="formFooter">
-                            Not Registerd?<span class="underlineHover"><Link to='/MoodCalendar/create'>Create an account</Link></span>
+                            Not Registerd?<span className="underlineHover"><Link to='/Create'>Create an account</Link></span>
                             <div className="alert alert-success" id="login_success">
                                 <strong>Success!</strong> Login Successfull
                             </div>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import firebase from '../Firebase';
-import { Link } from 'react-router-dom'
 
 export default class Logout extends Component{
     constructor(props) {
@@ -15,6 +14,7 @@ export default class Logout extends Component{
     Logout() {
         firebase.auth().signOut()
         .then(function(){
+            this.props.router.push('/');
         })
         .catch(function(error) {
             var errorCode = error.code;
@@ -27,9 +27,7 @@ export default class Logout extends Component{
 
     render(){
         return(
-            <Link to='/MoodCalendar'>
-                <input type="button" onClick={ () => { this.Logout() }} value="Logout"/>
-            </Link>
+            <input type="button" onClick={ () => { this.Logout() }} value="Logout"/>
         )
     }
 }
