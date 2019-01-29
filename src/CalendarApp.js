@@ -10,6 +10,7 @@ import './Contents/CSS/App.css';
 import Stats from './Components/Stats'
 import Calendar from './Components/Calendar'
 import Logout from './HomePage/Logout'
+import TableOfContents from './Components/TableOfContents'
 
 export default class CalendarApp extends Component {
   constructor(props) {
@@ -31,10 +32,14 @@ export default class CalendarApp extends Component {
 
     return (
       <Provider store={store} >
-        <PersistGate loading={null} persistor={persistor}>
-        <Logout/>
           <div className="App">
-            <div className="Calendar">
+            <div className="Buffer">
+              <h2>Table of Contents</h2>
+              <Logout history = {this.props.history}/>
+              <TableOfContents />
+            </div>
+            <div className="Calendar-Container">
+              <h1>Calendar</h1>
               <Calendar />
             </div>
             <div className="Buffer">
@@ -42,7 +47,6 @@ export default class CalendarApp extends Component {
               <Stats />
             </div>
           </div>
-        </PersistGate>
       </Provider>
     );
   }

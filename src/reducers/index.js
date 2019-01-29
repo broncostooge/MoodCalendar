@@ -10,6 +10,15 @@ const initialState = {
 export default (state = initialState, action) => {
     const newState = {...state};
     
+    //SET MOOD COUNT WHEN USERS LOGS IN
+    if(action.type === 'SET_MOOD_COUNT'){
+        newState.Horrible = action.moodCount.Horrible;
+        newState.Bad = action.moodCount.Bad;
+        newState.Average = action.moodCount.Average;
+        newState.Good = action.moodCount.Good;
+        newState.Great = action.moodCount.Great;
+    }
+
     //HORRIBLE
     if(action.type === 'INCREASE_HORRIBLE_MOOD_COUNT'){
         newState.Horrible += 1;

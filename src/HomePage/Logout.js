@@ -5,16 +5,15 @@ export default class Logout extends Component{
     constructor(props) {
         super(props)
         this.state = {
+            history: this.props.history
         };
 
         this.Logout = this.Logout.bind(this);
-
     }
-
-    Logout() {
+    Logout(history) {
         firebase.auth().signOut()
         .then(function(){
-            this.props.router.push('/');
+            history.push('/');
         })
         .catch(function(error) {
             var errorCode = error.code;
@@ -27,7 +26,7 @@ export default class Logout extends Component{
 
     render(){
         return(
-            <input type="button" onClick={ () => { this.Logout() }} value="Logout"/>
+            <input type="button" onClick={ () => { this.Logout(this.state.history) }} value="Logout"/>
         )
     }
 }

@@ -44,6 +44,18 @@ class HomePage extends Component {
                 
                 store.dispatch({ type: 'SET_USER', User: user });
 
+                firebase.firestore().collection("UserMoodCalendar").doc(firebase.auth().currentUser.uid).get().then((thisDoc) => {
+                    let moodCount = {
+                                        Horrible: thisDoc.data().Horrible,
+                                        Bad: thisDoc.data().Bad,
+                                        Average: thisDoc.data().Average,
+                                        Good: thisDoc.data().Good,
+                                        Great: thisDoc.data().Great
+                                    }
+
+                    store.dispatch({ type: 'SET_MOOD_COUNT', moodCount: moodCount});
+                })
+
                 setTimeout(() => {
                     this.props.history.push('/MoodCalendar');
                 }, 1000);
@@ -85,7 +97,7 @@ class HomePage extends Component {
                     <form>
 
                         <input type="text" id="login" className="fadeIn second" name="login" placeholder="username"/>
-                        <input type="text" id="password" className="fadeIn third" name="login" placeholder="password"/>
+                        <input type="password" id="password" className="fadeIn third" name="login" placeholder="password"/>
                         <input type="button" className="fadeIn fourth" value="Log In" onClick={ () => { this.Login(document.getElementById('login').value, document.getElementById('password').value) }}/>
                         
                         <div id="formFooter">

@@ -22,7 +22,7 @@ class ColumnGraph extends Component {
             <div>
                 <h3>Column Graph</h3>
                 <BarChart width={600} height={300} data={data}
-                    margin={{top: 5, right: 30, left: 20, bottom: 5}}>
+                    margin={{top: 5, right: 0, left: 150, bottom: 5}}>
                     <CartesianGrid />
                     <XAxis dataKey="name"/>
                     <YAxis/>
@@ -31,7 +31,7 @@ class ColumnGraph extends Component {
                     <Bar dataKey="Horrible" fill="red" />
                     <Bar dataKey="Bad" fill="orange" />
                     <Bar dataKey="Average" fill="yellow" />
-                    <Bar dataKey="Good" fill="blue" />
+                    <Bar dataKey="Good" fill="#00a8f3" />
                     <Bar dataKey="Great" fill="green" />
                 </BarChart>
             </div>

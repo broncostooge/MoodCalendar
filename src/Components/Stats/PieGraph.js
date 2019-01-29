@@ -17,7 +17,7 @@ class PieGraph extends Component {
             {name: 'Good', value: this.props.Good}, 
             {name: 'Great', value: this.props.Great}
         ];
-        const COLORS = ['red', 'orange', 'yellow', 'blue', 'green'];   
+        const COLORS = ['red', 'orange', 'yellow', '#00a8f3', 'green'];   
 
         return (
             <div>
@@ -32,11 +32,11 @@ class PieGraph extends Component {
                 outerRadius={80} 
                 fill="#8884d8"
                 paddingAngle={5}
+                label
                 >
                     {
                         data.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]}/>)
                     }
-                <Legend />
                 </Pie>
             </PieChart>
         </div>

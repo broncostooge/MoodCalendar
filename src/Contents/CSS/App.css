@@ -49,7 +49,8 @@ h1{
 
 .Count div{
   display:flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .PieGraph{
@@ -58,6 +59,10 @@ h1{
 
 .ColumnGraph{
   flex: 1;
+}
+
+.ColumnGraph div{
+  justify-content: center;
 }
 
 .StatsCountRow{
