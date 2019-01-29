@@ -51,7 +51,7 @@ export default class CreateUser extends Component {
                 });
 
                 setTimeout(() => {
-                    this.props.history.push('/');
+                    this.props.history.push('/MoodCalendar');
                 }, 1000);
             })
             .catch((error) => {

@@ -13,7 +13,7 @@ export default class Logout extends Component{
     Logout(history) {
         firebase.auth().signOut()
         .then(function(){
-            history.push('/');
+            history.push('/MoodCalendar');
         })
         .catch(function(error) {
             var errorCode = error.code;

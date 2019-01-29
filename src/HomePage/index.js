@@ -58,7 +58,7 @@ class HomePage extends Component {
                 })
 
                 setTimeout(() => {
-                    this.props.history.push('/MoodCalendar');
+                    this.props.history.push('/MoodCalendar/App');
                 }, 1000);
             })
             .catch((error) => {

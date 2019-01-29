@@ -18,9 +18,9 @@ export default class Routes extends Component {
 
         return(
             <Switch>
-                <Route exact path='/' component={Home}/>
+                <Route exact path='/MoodCalendar' component={Home}/>
                 <Route exact path='/Create' component={CreateUser}/>
-                <Route exact path='/MoodCalendar' component={MoodCalendar}/>
+                <Route exact path='/MoodCalendar/App' component={MoodCalendar}/>
             </Switch>
         )
     }
