@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux'
-import { PersistGate } from 'redux-persist/integration/react'
-import { persistor, store } from './store';
+import { store } from './store';
 
 //CSS
 import './Contents/CSS/App.css';
@@ -9,7 +8,6 @@ import './Contents/CSS/App.css';
 //Compoonents
 import Stats from './Components/Stats'
 import Calendar from './Components/Calendar'
-import Logout from './HomePage/Logout'
 import TableOfContents from './Components/TableOfContents'
 
 export default class CalendarApp extends Component {
@@ -29,14 +27,12 @@ export default class CalendarApp extends Component {
   };
 
   render() {
-
     return (
       <Provider store={store} >
           <div className="App">
             <div className="Buffer">
               <h2>Table of Contents</h2>
-              <Logout history = {this.props.history}/>
-              <TableOfContents />
+              <TableOfContents history = {this.props.history}/>
             </div>
             <div className="Calendar-Container">
               <h1>Calendar</h1>

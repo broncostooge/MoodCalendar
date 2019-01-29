@@ -40,7 +40,7 @@ class Count extends Component {
         let CountListDiv = []
 
         function CountOutputDiv(countList, name, index, moodCount, imgSrc){
-            return(countList.push(<div className="StatsCountRow" key={index}><div><img src={imgSrc}/></div><div>{moodCount}</div></div>))
+            return(countList.push(<div className="StatsCountRow" key={index}><div><img alt={index} src={imgSrc}/></div><div>{moodCount}</div></div>))
         }
 
 

@@ -4,12 +4,18 @@ const initialState = {
     Average:0,
     Good:0,
     Great:0,
-    User: null
+    User: null,
+    Doc: null
 };
 
 export default (state = initialState, action) => {
     const newState = {...state};
     
+    //SET DOC FOR USER FROM FIREBASE
+    if(action.type === 'SET_DOC'){
+        newState.Doc = action.doc;
+    }
+
     //SET MOOD COUNT WHEN USERS LOGS IN
     if(action.type === 'SET_MOOD_COUNT'){
         newState.Horrible = action.moodCount.Horrible;

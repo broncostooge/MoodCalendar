@@ -12,13 +12,13 @@ class Mood extends Component {
                 name: this.props.name || "default",
                 month: this.props.month,
                 day: this.props.day,
-                color: localStorage.getItem(this.props.month + ' ' + this.props.day) || this.props.color || "gray",
-                note: localStorage.getItem(this.props.month + ' ' + this.props.day + ' note') || ""
+                color: this.props.Doc[this.props.month + ' ' + this.props.day] || this.props.color || "gray",
+                note: this.props.Doc[this.props.month + ' ' + this.props.day + ' note'] || ""
             },
             open: false,
         };
     }
-
+    
     onOpenModal = () => {
         this.setState({ open: true });
     };
@@ -105,8 +105,10 @@ class Mood extends Component {
         this.dispatchIncreaseMoodToStore(colorToChangeTo);
 
         this.dispatchDecreaseMoodToStore(colorChangingFrom);
-        
-        localStorage.setItem(this.props.month + ' ' + this.props.day, colorToChangeTo);
+
+        firebase.firestore().collection("UserMoodCalendar").doc(firebase.auth().currentUser.uid).get().then((thisDoc) => {
+            firebase.firestore().collection("UserMoodCalendar").doc(firebase.auth().currentUser.uid).update({[this.state.mood.month +' '+ this.state.mood.day]: this.state.mood.color });
+        })
         
         this.setState({mood:{name:this.state.mood.name, month:this.state.mood.month, day:this.state.mood.day, color:colorToChangeTo, note:this.state.mood.note}});
     }
@@ -115,7 +117,9 @@ class Mood extends Component {
         const noteText =  document.getElementById("NoteTextArea");
         const noteSaved = document.getElementById("NoteSaved");
 
-        localStorage.setItem(this.props.month + ' ' + this.props.day + ' note', noteText.value);
+        firebase.firestore().collection("UserMoodCalendar").doc(firebase.auth().currentUser.uid).get().then((thisDoc) => {
+            firebase.firestore().collection("UserMoodCalendar").doc(firebase.auth().currentUser.uid).update({[this.state.mood.month + ' ' + this.state.mood.day + ' note' ]: this.state.mood.note });
+        })
 
         this.setState({mood:{name:this.state.mood.name, month:this.state.mood.month, day:this.state.mood.day, color:this.state.mood.color, note: noteText.value}});
         noteSaved.style.display = "block";
@@ -131,7 +135,6 @@ class Mood extends Component {
     }
 
     render() {
-
         const buttonStyle = {
             backgroundColor: "gray"
         };
@@ -142,7 +145,7 @@ class Mood extends Component {
 
         buttonStyle.backgroundColor = this.state.mood.color;
 
-        const colorOfMood = localStorage.getItem(this.state.mood.month + ' ' + this.state.mood.day);
+        const colorOfMood = this.props.Doc[this.props.month + ' ' + this.props.day];
 
         if(colorOfMood && !this.props.TOCButton){
             buttonStyle.backgroundColor = colorOfMood;
@@ -200,7 +203,8 @@ class Mood extends Component {
 
 function mapStateToProps(state) {
     return { 
-        User: state.User
+        User: state.User,
+        Doc: state.Doc
     };
   }
 

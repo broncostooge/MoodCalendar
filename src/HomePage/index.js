@@ -39,7 +39,7 @@ class HomePage extends Component {
         if(email && password){
             firebase.auth().signInWithEmailAndPassword(email, password)
             .then((user) => {
-
+                
                 document.getElementById('login_success').style.display = "block";
                 
                 store.dispatch({ type: 'SET_USER', User: user });
@@ -54,6 +54,7 @@ class HomePage extends Component {
                                     }
 
                     store.dispatch({ type: 'SET_MOOD_COUNT', moodCount: moodCount});
+                    store.dispatch({ type: 'SET_DOC', doc: thisDoc.data()})
                 })
 
                 setTimeout(() => {

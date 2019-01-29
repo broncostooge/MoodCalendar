@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Mood from '../Calendar/Mood';
+import Logout from '../../HomePage/Logout'
 import { store } from '../../store'
 
 export default class extends Component{
@@ -74,12 +75,15 @@ export default class extends Component{
 
         return (
           <div>
+          <div>
             Leap Year
             <select id="LeapYearSelect" onChange={this.handleChange.bind(this)}>
               <option value="Yes">Yes</option>
               <option value="No">No</option>
             </select>
               {ListOfMoods}
+            </div>
+            <Logout history = {this.props.history}/>
           </div>
         )
       }
