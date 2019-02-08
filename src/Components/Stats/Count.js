@@ -1,5 +1,7 @@
 import React, { Component }  from 'react';
 import { connect } from 'react-redux';
+
+//MOOD IMAGES
 import HorribleLogo from '../../Contents/Images/Horrible.png'
 import BadLogo from '../../Contents/Images/Bad.png'
 import AverageLogo from '../../Contents/Images/Average.png'
@@ -11,7 +13,7 @@ class Count extends Component {
         super(props)
           this.state = {
         }
-      }
+    };
 
     render() {
         const moods =  [
@@ -68,8 +70,8 @@ class Count extends Component {
             <div>
                 {CountListDiv}
             </div>
-        )
-    }
+        );
+    };
 }
 
 function mapStateToProps(state) {

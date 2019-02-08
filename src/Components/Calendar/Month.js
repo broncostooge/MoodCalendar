@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import Mood from './Mood'
+
+//COMPONENTS
+import Mood from './Mood';
 
 export default class Month extends Component {
     constructor(props) {
@@ -9,14 +11,15 @@ export default class Month extends Component {
                 name: this.props.name,
                 days: this.props.days
             }
-        }
-    }
-    render() {
+        };
+    };
+
+    render(){
 
         const buttons = [];
 
-        for(let i = 0; i < this.state.month.days; i++){
-            if(this.state.month.name === "Febuary" && i === 28){
+        for (let i = 0; i < this.state.month.days; i++){
+            if (this.state.month.name === "Febuary" && i === 28){
                 buttons.push(<Mood LeapYearDay={true} TOCButton = {false} key={i} month={this.state.month.name} day={i} />);
             }else{
                 buttons.push(<Mood TOCButton = {false} key={i} month={this.state.month.name} day={i} />);
@@ -31,5 +34,5 @@ export default class Month extends Component {
                 {buttons}
             </div>
         );
-    }
+    };
 }

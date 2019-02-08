@@ -10,6 +10,7 @@ export default class Logout extends Component{
 
         this.Logout = this.Logout.bind(this);
     }
+
     Logout(history) {
         firebase.auth().signOut()
         .then(function(){
@@ -18,15 +19,12 @@ export default class Logout extends Component{
         .catch(function(error) {
             var errorCode = error.code;
             var errorMessage = error.message;
-
-            console.log(errorCode);
-            console.log(errorMessage);
         });
     }
 
     render(){
         return(
             <input type="button" onClick={ () => { this.Logout(this.state.history) }} value="Logout"/>
-        )
-    }
+        );
+    };
 }

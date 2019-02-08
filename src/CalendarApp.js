@@ -16,7 +16,7 @@ export default class CalendarApp extends Component {
     this.state = {
       open: true
     };
-  }
+  };
 
   onCloseModal = () => {
     this.setState({ open: false });

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+
+//COMPONENTS
 import firebase from '../Firebase';
 
 export default class CreateUser extends Component {
@@ -13,7 +15,7 @@ export default class CreateUser extends Component {
 
         this.CreateUser = this.CreateUser.bind(this);
 
-    }
+    };
 
     componentDidMount(){
         document.getElementById('create_warning').style.display = "none";
@@ -22,7 +24,7 @@ export default class CreateUser extends Component {
     }
 
     CreateUser(email, password) {
-        
+
         this.setState (() => {
             return {WarningMessage: "", ErrorCode: "", ErrorMessage : ""};
         })
@@ -31,7 +33,7 @@ export default class CreateUser extends Component {
         document.getElementById('create_danger').style.display = "none";
         document.getElementById('create_success').style.display = "none";
 
-        if(email && password){
+        if (email && password){
             firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(function(){
                 document.getElementById('create_success').style.display = "block";
@@ -62,19 +64,19 @@ export default class CreateUser extends Component {
             });
         }
         else{
-            if(email && !password){
+            if (email && !password){
                 this.setState (() => {
-                    return {WarningMessage: " Password", ErrorCode: "", ErrorMessage : ""};
+                    return {WarningMessage: " Password"};
                 })
             }
-            else if(!email && password){
+            else if (!email && password){
                 this.setState (() => {
-                    return {WarningMessage: " Email", ErrorCode: "", ErrorMessage : ""};
+                    return {WarningMessage: " Email"};
                 })
             }
-            else if(!email && !password){
+            else if (!email && !password){
                 this.setState (() => {
-                    return {WarningMessage: " Email & Password", ErrorCode: "", ErrorMessage : ""};
+                    return {WarningMessage: " Email & Password"};
                 })
             }
             document.getElementById('create_warning').style.display = "block";
@@ -109,6 +111,6 @@ export default class CreateUser extends Component {
                     </form>
                 </div>
             </div>
-        )
-    }
+        );
+    };
 }

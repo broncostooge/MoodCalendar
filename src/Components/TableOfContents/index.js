@@ -1,21 +1,18 @@
 import React, { Component } from 'react';
+
+//COMPONENTS
 import Mood from '../Calendar/Mood';
 import Logout from '../../HomePage/Logout'
 import { store } from '../../store'
 
 export default class extends Component{
-    constructor(props) {
-        super(props)
-        this.state = {
-        }
-      }
-      
+
       handleChange(e){
         const sel = document.getElementById("LeapYearSelect");
-        let leapYearButton = document.getElementById("LeapYearDay");
         let text= sel.options[sel.selectedIndex].text;
+        let leapYearButton = document.getElementById("LeapYearDay");
 
-        if(text === "Yes"){
+        if (text === "Yes"){
           leapYearButton.style.display = "";
         }
         else{
@@ -38,8 +35,6 @@ export default class extends Component{
           }
 
           leapYearButton.style.backgroundColor = "white";
-          localStorage.removeItem('Febuary 28');
-
         }
       }
 

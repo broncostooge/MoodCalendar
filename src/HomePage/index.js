@@ -16,7 +16,7 @@ class HomePage extends Component {
 
         this.Login = this.Login.bind(this);
 
-    }
+    };
 
     HideAlerts(){
         document.getElementById('login_warning').style.display = "none";
@@ -46,15 +46,15 @@ class HomePage extends Component {
 
                 firebase.firestore().collection("UserMoodCalendar").doc(firebase.auth().currentUser.uid).get().then((thisDoc) => {
                     let moodCount = {
-                                        Horrible: thisDoc.data().Horrible,
-                                        Bad: thisDoc.data().Bad,
-                                        Average: thisDoc.data().Average,
-                                        Good: thisDoc.data().Good,
-                                        Great: thisDoc.data().Great
-                                    }
+                        Horrible: thisDoc.data().Horrible,
+                        Bad: thisDoc.data().Bad,
+                        Average: thisDoc.data().Average,
+                        Good: thisDoc.data().Good,
+                        Great: thisDoc.data().Great
+                    }
 
                     store.dispatch({ type: 'SET_MOOD_COUNT', moodCount: moodCount});
-                    store.dispatch({ type: 'SET_DOC', doc: thisDoc.data()})
+                    store.dispatch({ type: 'SET_DOC', doc: thisDoc.data()});
                 })
 
                 setTimeout(() => {
@@ -69,17 +69,17 @@ class HomePage extends Component {
             });
         }
         else{
-            if(email && !password){
+            if (email && !password){
                 this.setState (() => {
                     return {WarningMessage: " Password", ErrorCode: "", ErrorMessage : ""};
                 })
             }
-            else if(!email && password){
+            else if (!email && password){
                 this.setState (() => {
                     return {WarningMessage: " Email", ErrorCode: "", ErrorMessage : ""};
                 })
             }
-            else if(!email && !password){
+            else if (!email && !password){
                 this.setState (() => {
                     return {WarningMessage: " Email & Password", ErrorCode: "", ErrorMessage : ""};
                 })
@@ -96,7 +96,6 @@ class HomePage extends Component {
                     <h1>Login</h1>
                     </div>
                     <form>
-
                         <input type="text" id="login" className="fadeIn second" name="login" placeholder="username"/>
                         <input type="password" id="password" className="fadeIn third" name="login" placeholder="password"/>
                         <input type="button" className="fadeIn fourth" value="Log In" onClick={ () => { this.Login(document.getElementById('login').value, document.getElementById('password').value) }}/>
@@ -116,14 +115,14 @@ class HomePage extends Component {
                     </form>
                 </div>
             </div>
-        )
-    }
+        );
+    };
 }
 
 function mapStateToProps(state) {
     return { 
         User: state.User
     };
-  }
+}
 
 export default connect(mapStateToProps)(HomePage);

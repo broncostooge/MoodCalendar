@@ -3,11 +3,6 @@ import { connect } from 'react-redux';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 class ColumnGraph extends Component {
-    constructor(props){
-        super(props)
-        this.state = {
-        }
-    }
 
     render() {
         const data = [
@@ -47,6 +42,6 @@ function mapStateToProps(state) {
         Good:state.Good,
         Great:state.Great 
     };
-  }
+}
 
 export default connect(mapStateToProps)(ColumnGraph);

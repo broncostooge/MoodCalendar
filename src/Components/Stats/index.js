@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+
+//COMPONENTS
 import ColumnGraph from './ColumnGraph';
 import Count from './Count';
 import PieGraph from './PieGraph'
@@ -20,5 +22,5 @@ export default class Stats extends Component{
                 </div>
             </div>
         );
-    }
+    };
 }

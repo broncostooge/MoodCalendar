@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import ColumnOfNumbers from './ColumnOfNumbers'
-import Month from './Month'
+
+//COMPONENTS
+import ColumnOfNumbers from './ColumnOfNumbers';
+import Month from './Month';
 
 export default class extends Component{
     constructor(props){
@@ -10,7 +12,7 @@ export default class extends Component{
         };
 
         this.CreateArrayOfMonthsAndDays = this.CreateArrayOfMonthsAndDays.bind(this);
-    }
+    };
 
     CreateArrayOfMonthsAndDays(){
         const ListOfMonthsAndDays = [
@@ -62,16 +64,16 @@ export default class extends Component{
                 name: "December",
                 days: 31
             }
-        ]
+        ];
 
         const months = [];
 
         ListOfMonthsAndDays.map((month, index) => {
-            return months.push(<Month name={month.name} days={month.days} key={index} />)
+            return months.push(<Month name={month.name} days={month.days} key={index} />);
         });
 
         return months;
-    }
+    };
 
     render() {
 
@@ -85,5 +87,5 @@ export default class extends Component{
                 {months}
             </div>
         );
-    }
+    };
 }

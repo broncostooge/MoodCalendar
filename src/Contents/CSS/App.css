@@ -105,6 +105,7 @@ img{
   flex-direction: column;
 }
 
+/* NOTE AREA */
 #NoteSaved{
   display:none;
 }
